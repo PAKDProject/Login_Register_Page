@@ -1,0 +1,124 @@
+#form-area {
+    padding-right: 5;
+    position: absolute;
+    top: 0;
+    right: 50px;
+    bottom: 0;
+    background: rgba(232, 233, 235, 0.6);
+    overflow: auto;
+}
+
+
+
+html {
+    background: url('../images/bg.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Monserrat', sans-serif;
+
+
+}
+
+.hidden {
+    display: none;
+}
+
+label {
+    width: 100%;
+}
+
+.floated-right {
+    float: right !important;
+    color: #12896e;
+}
+#bottomMessage {
+    font-size: 0.8em;
+    text-align: center;
+    padding: 15px 0;
+}
+
+h1 span {
+    color: #3A6073;
+    font-size: 1.5em;
+    padding: 5px;
+    font-weight: lighter;
+
+}
+
+button {
+    background-color: #12896e;
+    color: white;
+    width: 50%;
+}
+
+.register {
+    font-size: 1em;
+    text-align: center;
+    padding-top: 15px;
+    color: #12896e;
+    padding-bottom: 15px;
+}
+
+
+
+/*input {
+      border: .05rem solid #12895e !important;
+  }*/
+
+#logo {
+    height: 33%;
+    position: relative;
+}
+
+#logo img {
+    font-family: 'Monserrat', sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: lighter;
+
+}
+
+/*sm screen size */
+@media (max-width: 576px) {
+    #top-row {
+        left: 10px;
+        right: 10px;
+        position: absolute;
+        top: 10px;
+        bottom: 10px;
+        margin: 0;
+        padding: 0;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    #form-area {
+        right: 0;
+    }
+}
+
+@media (max-width: 767.98px) {
+    #top-row {
+        left: 10px;
+        right: 10px;
+        position: absolute;
+        top: 10px;
+        bottom: 10px;
+        margin: 0;
+        padding: 0;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    #form-area {
+        right: 0;
+    }
+}
