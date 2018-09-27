@@ -17,7 +17,7 @@ $(document).ready(() => {
           event.stopPropagation()
         }
         
-        //Add class
+        
         form.addClass('was-validated');
         registerForm.addClass('was-validated');
 
