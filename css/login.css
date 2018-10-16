@@ -8,6 +8,10 @@
     overflow: auto;
 }
 
+#loginForm small,
+#loginForm label {
+    margin-left: 2px;
+}
 
 
 html {
@@ -33,6 +37,7 @@ label {
     float: right !important;
     color: #12896e;
 }
+
 #bottomMessage {
     font-size: 0.8em;
     text-align: center;
