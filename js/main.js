@@ -5,6 +5,8 @@ document.getElementById("formRegister").addEventListener("submit", registerFormS
 //Confirmation Code part
 document.getElementById("formConfirm").addEventListener("submit", confirmationFormSubmit, false);
 
+let email
+
 $(document).ready(() => {
   //Show or hide form based on selections on page
   $("#toggleRegisterPage").click(() => {
@@ -43,17 +45,16 @@ function loginFormSubmit(e) {
 
     console.log(loginObject);
 
-    const apiUrl = "";
+    const apiUrl = "http://localhost:3000/auth/login";
 
     fetch(apiUrl, {
       method: "POST",
-      mode: "cors",
       headers: {
         "Content-Type": "application/json; charset=utf-8"
       },
       body: JSON.stringify(loginObject)
     }).then(res => {
-      console.log(res);
+      window.location.replace(res.headers['Location'])
     });
 
     e.preventDefault();
@@ -76,6 +77,7 @@ function registerFormSubmit(e) {
       if (formElements[i].type != "submit")
         postData[formElements[i].name] = formElements[i].value;
     }
+    email = postData.regEmail
 
     const registrationObject = {
       email: postData.regEmail,
@@ -85,7 +87,7 @@ function registerFormSubmit(e) {
     };
     console.log(registrationObject);
 
-    const apiUrl = ""; //Enter endpoint
+    const apiUrl = "http://localhost:3000/auth/register"; //Enter endpoint
 
     fetch(apiUrl, {
       method: "POST",
@@ -107,6 +109,7 @@ function registerFormSubmit(e) {
 function confirmationFormSubmit(e) {
   const form = document.getElementById("formConfirm");
   var formElements = document.getElementById("formConfirm").elements;
+  const formEmail = document.getElementById("formRegister").elements;
   var postData = {};
 
 
@@ -124,9 +127,7 @@ function confirmationFormSubmit(e) {
     }
 
     const confirmationCode = postData.confirmationCode;
-    console.log(confirmationCode);
-
-    const apiUrl = ""; //endpoint
+    const apiUrl = "http://localhost:3000/auth/confirm"; //endpoint
 
     fetch(apiUrl, {
       method: "POST",
@@ -134,7 +135,10 @@ function confirmationFormSubmit(e) {
       headers: {
         "Content-Type": "application/json; charset=utf-8"
       },
-      body: JSON.stringify(confirmationCode)
+      body: JSON.stringify({
+        confirmationCode,
+        email
+      })
     }).then(res => {
       console.log(res);
     });
