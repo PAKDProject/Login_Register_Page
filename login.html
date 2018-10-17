@@ -41,8 +41,7 @@
                                     <label for="password">Password <a href="#" class="floated-right">Forgot Password</a></label>
                                     <input type="password" class="form-control" id="password" placeholder="Password"
                                         required minlength="8" name="password">
-                                    <div class="invalid-feedback">Password must be at least 8 characters long and
-                                        contain a number and uppercase letter</div>
+                                    <div class="invalid-feedback">The password you entered is incorrect</div>
                                 </div>
                                 <input type="submit" class="btn float-right" id="loginFormSubmit" value="Login" />
                             </form>
@@ -125,7 +124,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                            <a href="#" class="register" id="toggleRegisterPage">Already have an account?</a>
+                            <a href="#" class="register" id="alreadyHaveAccount">Already have an account?</a>
                         </div>
                     </div>
 
@@ -142,8 +141,12 @@
                                                 Code</a></label>
                                         <input type="text" class="form-control" id="confirmationCode" name="confirmationCode"
                                             placeholder="Confirmation Code" required>
+                                        <div class="invalid-feedback">
+                                            Please enter the validation code emailed to you
+                                        </div>
                                         <small id="confirmMessage" class="form-text text-muted">A confirmation code has
                                             been sent to your email address.</small>
+
                                     </div>
                                 </div>
                                 <div class="form-row">
