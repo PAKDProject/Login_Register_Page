@@ -38,7 +38,6 @@ const loginFormSubmit = (e) => {
   };
 
   console.log(loginObject);
-  //constructDiv(form);
 
 
   const apiUrl = "http://localhost:3000/auth/login";
@@ -60,8 +59,8 @@ const loginFormSubmit = (e) => {
   }).fail((res) => {
     switch (res.status) {
       case 403:
-        alert('Nay')
-        break
+        constructDiv(res.message, "login-validation-text");
+        break;
       default:
         alert('wtf?')
         break
@@ -111,7 +110,7 @@ const registerFormSubmit = (e) => {
     }).fail((res) => {
       switch (res.status) {
         case 403:
-          alert('Nay')
+          constructDiv(res.message, "register-validation-text")
           break
         default:
           alert('wtf?')
@@ -152,13 +151,13 @@ const confirmationFormSubmit = (e) => {
       console.log(res.status)
       switch (res.status) {
         case 201:
-          alert('Yay')
+          window.location.replace("https://google.ie"); //TODO - Enter angular app location
           break
       }
     }).fail((res) => {
       switch (res.status) {
         case 403:
-          alert('Nay')
+          constructDiv(res.message, "confirmation-validation-text");
           break
         default:
           alert('wtf?')
@@ -174,8 +173,8 @@ const confirmationFormSubmit = (e) => {
 
 };
 
-const constructDiv = () => {
-  $("#validation-text").append("<div class='loginFeedback'>Incorrect login details</div>")
+const constructDiv = (messageText, locationID) => {
+  $(`#${locationID}`).append(`<div class='loginFeedback'>${messageText}</div>`)
 }
 const getFormData = (formName) => {
   const formElements = document.getElementById(formName).elements;
