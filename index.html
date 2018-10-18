@@ -5,69 +5,171 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>E-Lance</title>
+    <title>Welcome to ELance - Freelancing made easy</title>
     <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="./css/main.css" rel="stylesheet" type="text/css">
+    <link href="./css/login.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
         crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400|Roboto" rel="stylesheet">
 </head>
 
 <body>
-    <!-- navbar -->
-    <div id="wrapper">
+    <div class="container">
+        <div class="row" id="top-row">
+            <!--SideBar Section-->
+            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-xs-12" id="form-area">
+                <!--Logo Section-->
+                <div class="row" id="logo">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <img src="./images/FullLogo.png" width="90%">
+                    </div>
+                </div>
+                <!-- Login Form -->
+                <div id="loginForm">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <form novalidate='' id="formLogin">
+                                <div class="form-group">
+                                    <label for="email">Email address</label>
+                                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                                        placeholder="Enter email" name="email">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email
+                                        with anyone else.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password <a href="#" class="floated-right">Forgot Password</a></label>
+                                    <input type="password" class="form-control" id="password" placeholder="Password"
+                                        name="password">
+                                </div>
+                                <div id="login-validation-text"></div>
+                                <input type="submit" class="btn float-right" id="loginFormSubmit" value="Login" />
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                            <p id="bottomMessage">Don't have an account yet? <a href="#" id="toggleRegisterPage" class="register">Register
+                                    Now</a></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Registration Form -->
+                <div class="hidden" id="registerForm">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <form novalidate='' class="needs-validation" id="formRegister">
+                                <div class="form-row">
+                                    <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                        <label for="fName">First Name</label>
+                                        <input type="text" class="form-control" id="regFName" aria-describedby="firstName"
+                                            placeholder="Joe" required name="regFName">
 
+                                        <div class="invalid-feedback">
+                                            Please enter your first name
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                        <label for="sName">Last Name</label>
+                                        <input type="text" class="form-control" id="regSName" aria-describedby="lastName"
+                                            placeholder="Sample" required name="regSName">
 
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <a href="#menu-toggle" id="menu-toggle"><i class="fas fa-bars fa-2x"></i>
-                </a>
+                                        <div class="invalid-feedback">
+                                            Please enter your last name
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" class="form-control" id="regEmail" placeholder="Email"
+                                            required name="regEmail">
+
+                                        <div class="invalid-feedback">
+                                            Please enter a valid email
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <label for="password">Password</label>
+                                        <input type="password" class="form-control" id="regPassword" placeholder="Password"
+                                            required minlength="8" name="regPassword">
+
+                                        <div class="invalid-feedback">
+                                            Password must be 8 characters long and contain both an uppercase letter and
+                                            a number
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <label for="re-pass">Re-enter Password</label>
+                                        <input type="password" class="form-control" id="re-pass" placeholder="Password"
+                                            required minlength="8">
+                                        <div class="invalid-feedback">
+                                            Password must be 8 characters long and contain both an uppercase letter and
+                                            a number
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="register-validation-text"></div>
+                                <div class="form-row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 float-right">
+                                        <input type="submit" class="btn float-right" id="registerFormSubmit" value="Submit" />
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                            <a href="#" class="register" id="alreadyHaveAccount">Already have an account?</a>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Confirmation Form -->
+                <div class="hidden" id="confirmationForm">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <form novalidate='' id="formConfirm">
+                                <div class="form-row">
+                                    <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+                                        <label for="confirmationCode">Confirmation Code <a href="#" class="floated-right">Resend
+                                                Code</a></label>
+                                        <input type="text" class="form-control" id="confirmationCode" name="confirmationCode"
+                                            placeholder="Confirmation Code" required>
+                                        <div class="invalid-feedback">
+                                            Please enter the validation code emailed to you
+                                        </div>
+                                        <small id="confirmMessage" class="form-text text-muted">A confirmation code has
+                                            been sent to your email address.</small>
+                                    </div>
+                                </div>
+                                <div id="confirmation-validation-text"></div>
+                                <div class="form-row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 float-right">
+                                        <input type="submit" class="btn float-right" id="confirmFormSubmit" value="Confirm Account" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- /#page-content-wrapper -->
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        Start Bootstrap
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Shortcuts</a>
-                </li>
-                <li>
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-
     </div>
 
 
-    <script>
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-    </script>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 
 </html>
