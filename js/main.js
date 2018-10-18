@@ -21,7 +21,7 @@ $(document).ready(() => {
   $("#formRegister").submit((e) => {
     registerFormSubmit(e);
   });
-  $("#confirmationFormSubmit").submit((e) => {
+  $("#formConfirm").submit((e) => {
     confirmationFormSubmit(e);
   });
 });
@@ -59,8 +59,8 @@ const loginFormSubmit = (e) => {
     }
   }).fail((res) => {
     switch (res.status) {
-      case 403:
-        alert('Nay')
+      case 400:
+        constructDiv()
         break
       default:
         alert('wtf?')
@@ -111,7 +111,7 @@ const registerFormSubmit = (e) => {
     }).fail((res) => {
       switch (res.status) {
         case 403:
-          alert('Nay')
+          constructDiv()
           break
         default:
           alert('wtf?')
@@ -138,15 +138,18 @@ const confirmationFormSubmit = (e) => {
     const confirmationCode = postData.confirmationCode;
     const apiUrl = "http://localhost:3000/auth/confirm"; //endpoint
 
+    var object = {
+      confirmationCode,
+      email
+    }
+
+    console.log(JSON.stringify(object))
     $.post(apiUrl, {
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      data: JSON.stringify({
-        confirmationCode,
-        email
-      }),
+      data: JSON.stringify(object),
       dataType: 'json',
     }).done((data, statusText, res) => {
       console.log(res.status)
