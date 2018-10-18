@@ -53,13 +53,13 @@ const loginFormSubmit = (e) => {
     console.log(res.status)
     switch (res.status) {
       case 200:
-        window.location.replace("https://google.ie"); //TODO - Change url
+        window.location.replace("http://localhost:4200"); //TODO - Change url
         break
     }
   }).fail((res) => {
     switch (res.status) {
       case 403:
-        constructDiv(res.message, "login-validation-text");
+        constructDiv(JSON.parse(res.responseText).message, "login-validation-text");
         break;
       default:
         alert('wtf?')
