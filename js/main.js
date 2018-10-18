@@ -177,6 +177,7 @@ const confirmationFormSubmit = (e) => {
 };
 
 const constructDiv = (messageText, locationID) => {
+  $(`#${locationID}`).empty()
   $(`#${locationID}`).append(`<div class='loginFeedback'>${messageText}</div>`)
 }
 const getFormData = (formName) => {
