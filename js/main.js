@@ -5,94 +5,84 @@ $(document).ready(() => {
   $("#toggleRegisterPage").click(() => {
     $("#loginForm").toggleClass("hidden");
     $("#registerForm").toggleClass("hidden");
+    $("#formRegister").removeClass("was-validated");
   });
 
   $("#alreadyHaveAccount").click(() => {
     $("#loginForm").toggleClass("hidden");
     $("#registerForm").toggleClass("hidden");
+    $("#formLogin").removeClass("was-validated");
   });
 
-  $("#formLogin").submit(() => {
-    loginFormSubmit();
+  $("#formLogin").submit((e) => {
+    loginFormSubmit(e);
   });
 
-  $("#formRegister").submit(() => {
-    registerFormSubmit();
+  $("#formRegister").submit((e) => {
+    registerFormSubmit(e);
   });
-  $("#confirmationFormSubmit").submit(() => {
-    confirmationFormSubmit();
+  $("#confirmationFormSubmit").submit((e) => {
+    confirmationFormSubmit(e);
   });
 });
 
 
-function loginFormSubmit(e) {
+const loginFormSubmit = (e) => {
   const form = document.getElementById("formLogin");
   const formElements = document.getElementById("formLogin").elements;
-  const postData = {};
+  const postData = getFormData("formLogin");
 
-  if (form.checkValidity() === false) {
-    event.preventDefault();
-    event.stopPropagation();
-    form.classList.add("was-validated");
+  const loginObject = {
+    email: postData.email,
+    password: postData.password
+  };
 
-  } else {
+  console.log(loginObject);
+  //constructDiv(form);
 
-    form.classList.add("was-validated");
-    for (var i = 0; i < formElements.length; i++) {
-      if (formElements[i].type != "submit")
-        postData[formElements[i].name] = formElements[i].value;
+
+  const apiUrl = "http://localhost:3000/auth/login";
+
+  $.post(apiUrl, {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    type: "POST",
+    data: JSON.stringify(loginObject),
+    success: (res) => {
+      alert("Success " + res)
+
+    },
+    error: (err) => {
+      alert(err);
     }
-    const loginObject = {
-      email: postData.email,
-      password: postData.password
-    };
-
-    console.log(loginObject);
-
-    const apiUrl = "http://localhost:3000/auth/login";
-
-    $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      data: JSON.stringify(loginObject),
-      dataType: "JSON"
-    }).success(() => {
-      alert("Yay");
-    })
+  });
 
 
-    // fetch(apiUrl, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json; charset=utf-8"
-    //   },
-    //   body: JSON.stringify(loginObject)
-    // }).then(res => {
-    //   window.location.replace(res.headers['Location'])
-    // });
+  // fetch(apiUrl, {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json; charset=utf-8"
+  //   },
+  //   body: JSON.stringify(loginObject)
+  // }).then(res => {
+  //   window.location.replace(res.headers['Location'])
+  // });
 
-    e.preventDefault();
-  }
+  e.preventDefault();
+
 };
 
-function registerFormSubmit(e) {
+const registerFormSubmit = (e) => {
   const form = document.getElementById("formRegister");
-  const formElements = document.getElementById("formRegister").elements;
-  const postData = {};
+  const postData = getFormData("formRegister");
 
   if (form.checkValidity() === false) {
     event.preventDefault();
     event.stopPropagation();
     form.classList.add("was-validated")
   } else {
-
     form.classList.add("was-validated");
-    for (var i = 0; i < formElements.length; i++) {
-      if (formElements[i].type != "submit")
-        postData[formElements[i].name] = formElements[i].value;
-    }
     email = postData.regEmail
 
     const registrationObject = {
@@ -122,26 +112,16 @@ function registerFormSubmit(e) {
   }
 };
 
-function confirmationFormSubmit(e) {
-  const form = document.getElementById("formConfirm");
-  var formElements = document.getElementById("formConfirm").elements;
-  const formEmail = document.getElementById("formRegister").elements;
-  var postData = {};
+const confirmationFormSubmit = (e) => {
 
+  const form = document.getElementById("formConfirm");
+  const postData = getFormData("formConfirm");
 
   if (form.checkValidity() === false) {
-    isValid = false;
     event.preventDefault();
     event.stopPropagation();
     form.classList.add("was-validated")
   } else {
-    $("#loginForm").toggleClass("hidden");
-    $("#confirmationForm").toggleClass("hidden");
-    for (let i = 0; i < formElements.length; i++) {
-      if (formElements[i].type !== "submit")
-        postData[formElements[i].name] = formElements[i].value;
-    }
-
     const confirmationCode = postData.confirmationCode;
     const apiUrl = "http://localhost:3000/auth/confirm"; //endpoint
 
@@ -159,7 +139,23 @@ function confirmationFormSubmit(e) {
       console.log(res);
     });
 
+
+    $("#loginForm").toggleClass("hidden");
+    $("#confirmationForm").toggleClass("hidden");
     e.preventDefault();
   }
 
 };
+
+const constructDiv = () => {
+  $("#validation-text").append("<div class='loginFeedback'>Incorrect login details</div>")
+}
+const getFormData = (formName) => {
+  const formElements = document.getElementById(formName).elements;
+  const postData = {};
+  for (var i = 0; i < formElements.length; i++) {
+    if (formElements[i].type != "submit")
+      postData[formElements[i].name] = formElements[i].value;
+  }
+  return postData;
+}

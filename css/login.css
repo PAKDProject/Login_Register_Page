@@ -25,6 +25,12 @@ html {
 
 }
 
+.loginFeedback {
+    font-size: 0.8em;
+    color: red;
+    margin-left: 2px;
+}
+
 .hidden {
     display: none;
 }
