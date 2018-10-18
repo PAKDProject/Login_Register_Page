@@ -69,7 +69,41 @@ const loginFormSubmit = (e) => {
   //   window.location.replace(res.headers['Location'])
   // });
 
-  e.preventDefault();
+  $.post(apiUrl, {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    type: "POST",
+    data: JSON.stringify(loginObject),
+    dataType: 'json',
+  }).done((data, statusText, res) => {
+    console.log(res.status)
+    switch (res.status) {
+      case 200:
+        alert('Yay')
+        break
+    }
+  }).fail((res) => {
+    switch (res.status) {
+      case 403:
+        alert('Nay')
+        break
+      default:
+        alert('wtf?')
+        break
+    }
+  })
+
+
+  // fetch(apiUrl, {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json; charset=utf-8"
+  //   },
+  //   body: JSON.stringify(loginObject)
+  // }).then(res => {
+  //   window.location.replace(res.headers['Location'])
+  // });
 
 };
 
