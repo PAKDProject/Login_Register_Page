@@ -49,32 +49,6 @@ const loginFormSubmit = (e) => {
     },
     type: "POST",
     data: JSON.stringify(loginObject),
-    success: (res) => {
-      alert("Success " + res)
-
-    },
-    error: (err) => {
-      alert(err);
-    }
-  });
-
-
-  // fetch(apiUrl, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json; charset=utf-8"
-  //   },
-  //   body: JSON.stringify(loginObject)
-  // }).then(res => {
-  //   window.location.replace(res.headers['Location'])
-  // });
-
-  $.post(apiUrl, {
-    headers: {
-      "Content-Type": "application/json"
-    },
-    type: "POST",
-    data: JSON.stringify(loginObject),
     dataType: 'json',
   }).done((data, statusText, res) => {
     console.log(res.status)
@@ -92,18 +66,9 @@ const loginFormSubmit = (e) => {
         alert('wtf?')
         break
     }
-  })
+  });
 
-
-  // fetch(apiUrl, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json; charset=utf-8"
-  //   },
-  //   body: JSON.stringify(loginObject)
-  // }).then(res => {
-  //   window.location.replace(res.headers['Location'])
-  // });
+  e.preventDefault();
 
 };
 
@@ -129,16 +94,30 @@ const registerFormSubmit = (e) => {
 
     const apiUrl = "http://localhost:3000/auth/register"; //Enter endpoint
 
-    fetch(apiUrl, {
-      method: "POST",
-      mode: "cors",
+    $.post(apiUrl, {
       headers: {
-        "Content-Type": "application/json; charset=utf-8"
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(registrationObject)
-    }).then(res => {
-      console.log(res);
-    });
+      type: "POST",
+      data: JSON.stringify(registrationObject),
+      dataType: 'json',
+    }).done((data, statusText, res) => {
+      console.log(res.status)
+      switch (res.status) {
+        case 201:
+          alert('Yay')
+          break
+      }
+    }).fail((res) => {
+      switch (res.status) {
+        case 403:
+          alert('Nay')
+          break
+        default:
+          alert('wtf?')
+          break
+      }
+    })
 
     e.preventDefault();
     $("#registerForm").toggleClass("hidden");
@@ -159,19 +138,33 @@ const confirmationFormSubmit = (e) => {
     const confirmationCode = postData.confirmationCode;
     const apiUrl = "http://localhost:3000/auth/confirm"; //endpoint
 
-    fetch(apiUrl, {
-      method: "POST",
-      mode: "cors",
+    $.post(apiUrl, {
       headers: {
-        "Content-Type": "application/json; charset=utf-8"
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({
+      type: "POST",
+      data: JSON.stringify({
         confirmationCode,
         email
-      })
-    }).then(res => {
-      console.log(res);
-    });
+      }),
+      dataType: 'json',
+    }).done((data, statusText, res) => {
+      console.log(res.status)
+      switch (res.status) {
+        case 201:
+          alert('Yay')
+          break
+      }
+    }).fail((res) => {
+      switch (res.status) {
+        case 403:
+          alert('Nay')
+          break
+        default:
+          alert('wtf?')
+          break
+      }
+    })
 
 
     $("#loginForm").toggleClass("hidden");
