@@ -1,13 +1,6 @@
-//Login Form
-document.getElementById("formLogin").addEventListener("submit", loginFormSubmit, false);
-//Register Form
-document.getElementById("formRegister").addEventListener("submit", registerFormSubmit, false);
-//Confirmation Code part
-document.getElementById("formConfirm").addEventListener("submit", confirmationFormSubmit, false);
-
-let email
-
 $(document).ready(() => {
+  let email;
+
   //Show or hide form based on selections on page
   $("#toggleRegisterPage").click(() => {
     $("#loginForm").toggleClass("hidden");
@@ -17,7 +10,18 @@ $(document).ready(() => {
   $("#alreadyHaveAccount").click(() => {
     $("#loginForm").toggleClass("hidden");
     $("#registerForm").toggleClass("hidden");
-  })
+  });
+
+  $("#formLogin").submit(() => {
+    loginFormSubmit();
+  });
+
+  $("#formRegister").submit(() => {
+    registerFormSubmit();
+  });
+  $("#confirmationFormSubmit").submit(() => {
+    confirmationFormSubmit();
+  });
 });
 
 
@@ -47,15 +51,27 @@ function loginFormSubmit(e) {
 
     const apiUrl = "http://localhost:3000/auth/login";
 
-    fetch(apiUrl, {
-      method: "POST",
+    $.post(apiUrl, {
       headers: {
-        "Content-Type": "application/json; charset=utf-8"
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(loginObject)
-    }).then(res => {
-      window.location.replace(res.headers['Location'])
-    });
+      type: "POST",
+      data: JSON.stringify(loginObject),
+      dataType: "JSON"
+    }).success(() => {
+      alert("Yay");
+    })
+
+
+    // fetch(apiUrl, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json; charset=utf-8"
+    //   },
+    //   body: JSON.stringify(loginObject)
+    // }).then(res => {
+    //   window.location.replace(res.headers['Location'])
+    // });
 
     e.preventDefault();
   }
