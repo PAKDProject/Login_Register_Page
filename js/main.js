@@ -21,7 +21,7 @@ $(document).ready(() => {
   $("#formRegister").submit((e) => {
     registerFormSubmit(e);
   });
-  $("#confirmationFormSubmit").submit((e) => {
+  $("#formConfirm").submit((e) => {
     confirmationFormSubmit(e);
   });
 });
@@ -53,13 +53,13 @@ const loginFormSubmit = (e) => {
     console.log(res.status)
     switch (res.status) {
       case 200:
-        window.location.replace("https://google.ie"); //TODO - Change url
+        window.location.replace("http://localhost:4200"); //TODO - Change url
         break
     }
   }).fail((res) => {
     switch (res.status) {
       case 403:
-        constructDiv(res.message, "login-validation-text");
+        constructDiv(JSON.parse(res.responseText).message, "login-validation-text");
         break;
       default:
         alert('wtf?')
@@ -137,15 +137,18 @@ const confirmationFormSubmit = (e) => {
     const confirmationCode = postData.confirmationCode;
     const apiUrl = "http://localhost:3000/auth/confirm"; //endpoint
 
+    var object = {
+      confirmationCode,
+      email
+    }
+
+    console.log(JSON.stringify(object))
     $.post(apiUrl, {
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      data: JSON.stringify({
-        confirmationCode,
-        email
-      }),
+      data: JSON.stringify(object),
       dataType: 'json',
     }).done((data, statusText, res) => {
       console.log(res.status)
@@ -174,8 +177,13 @@ const confirmationFormSubmit = (e) => {
 };
 
 const constructDiv = (messageText, locationID) => {
+<<<<<<< HEAD
   $(`#${locationID}`).empty();
   $(`#${locationID}`).append(`<div class='loginFeedback'>${messageText}</div>`);
+=======
+  $(`#${locationID}`).empty()
+  $(`#${locationID}`).append(`<div class='loginFeedback'>${messageText}</div>`)
+>>>>>>> 2b296dc72b92de9613731b7a816eb2152dcf2e8a
 }
 const getFormData = (formName) => {
   const formElements = document.getElementById(formName).elements;
