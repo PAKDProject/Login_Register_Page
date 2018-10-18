@@ -8,6 +8,11 @@ $(document).ready(() => {
     $("#formRegister").removeClass("was-validated");
   });
 
+  $("#toggleForgotPassword").click(() => {
+    $("#loginForm").toggleClass("hidden");
+    $("#forgotPassword").toggleClass("hidden");
+  });
+
   $("#alreadyHaveAccount").click(() => {
     $("#loginForm").toggleClass("hidden");
     $("#registerForm").toggleClass("hidden");
@@ -177,13 +182,8 @@ const confirmationFormSubmit = (e) => {
 };
 
 const constructDiv = (messageText, locationID) => {
-<<<<<<< HEAD
-  $(`#${locationID}`).empty();
-  $(`#${locationID}`).append(`<div class='loginFeedback'>${messageText}</div>`);
-=======
   $(`#${locationID}`).empty()
   $(`#${locationID}`).append(`<div class='loginFeedback'>${messageText}</div>`)
->>>>>>> 2b296dc72b92de9613731b7a816eb2152dcf2e8a
 }
 const getFormData = (formName) => {
   const formElements = document.getElementById(formName).elements;
