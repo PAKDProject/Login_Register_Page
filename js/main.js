@@ -12,8 +12,8 @@ $(document).ready(() => {
     $("#registerForm").toggleClass("hidden");
   });
 
-  $("#formLogin").submit(() => {
-    loginFormSubmit();
+  $("#formLogin").submit((e) => {
+    loginFormSubmit(e);
   });
 
   $("#formRegister").submit(() => {
@@ -57,9 +57,23 @@ function loginFormSubmit(e) {
       },
       type: "POST",
       data: JSON.stringify(loginObject),
-      dataType: "JSON"
-    }).success(() => {
-      alert("Yay");
+      dataType: 'json',
+    }).done((data, statusText, res) => {
+      console.log(res.status)
+      switch(res.status){
+        case 200:
+          alert('Yay')
+          break
+      }
+    }).fail((res) => {
+      switch(res.status){
+        case 403:
+          alert('Nay')
+          break
+        default: 
+          alert('wtf?')
+          break
+      }
     })
 
 
