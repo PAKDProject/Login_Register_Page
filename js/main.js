@@ -53,7 +53,7 @@ const loginFormSubmit = (e) => {
     console.log(res.status)
     switch (res.status) {
       case 200:
-        alert('Yay')
+        window.location.replace("https://google.ie"); //TODO - Change url
         break
     }
   }).fail((res) => {
@@ -109,7 +109,7 @@ const registerFormSubmit = (e) => {
       }
     }).fail((res) => {
       switch (res.status) {
-        case 403:
+        case 400:
           constructDiv(res.message, "register-validation-text")
           break
         default:
@@ -160,7 +160,7 @@ const confirmationFormSubmit = (e) => {
           constructDiv(res.message, "confirmation-validation-text");
           break
         default:
-          alert('wtf?')
+          constructDiv(res.message, "confirmation-validation-text");
           break
       }
     })
