@@ -56,6 +56,7 @@ const confirmPasswordChangeFormSubmit = e => {
     form.classList.add("was-validated");
 
     globalEmail = document.getElementById("confirmEmail").value;
+    alert(globalEmail)
 
     const apiUrl = "http://localhost:3000/auth/forgot/start"; //Enter endpoint
 
@@ -64,7 +65,9 @@ const confirmPasswordChangeFormSubmit = e => {
           "Content-Type": "application/json"
         },
         type: "POST",
-        data: JSON.stringify(globalEmail),
+        data: JSON.stringify({
+          email: globalEmail
+        }),
         dataType: "json"
       })
       .done((data, statusText, res) => {
@@ -130,7 +133,7 @@ const forgotPasswordFormSubmit = e => {
           case 201:
             alert("Yay");
             $("#loginForm").toggleClass("hidden");
-            $("#confirmPasswordChange").toggleClass("hidden");
+            $("#forgotPassword").toggleClass("hidden");
             break;
         }
       })
@@ -149,6 +152,7 @@ const forgotPasswordFormSubmit = e => {
 };
 
 const resendConfirmationCode = () => {
+  alert(globalEmail)
   const apiUrl = "http://localhost:3000/auth/revalidate"
   $.post(apiUrl, {
       headers: {
@@ -340,8 +344,7 @@ const confirmationFormSubmit = e => {
         }
       });
 
-    $("#loginForm").toggleClass("hidden");
-    $("#confirmationForm").toggleClass("hidden");
+
     e.preventDefault();
   }
 };
