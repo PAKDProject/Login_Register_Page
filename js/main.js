@@ -64,7 +64,9 @@ const confirmPasswordChangeFormSubmit = e => {
           "Content-Type": "application/json"
         },
         type: "POST",
-        data: JSON.stringify(globalEmail),
+        data: JSON.stringify({
+          email: globalEmail
+        }),
         dataType: "json"
       })
       .done((data, statusText, res) => {
@@ -80,13 +82,13 @@ const confirmPasswordChangeFormSubmit = e => {
         switch (res.status) {
           case 400:
             constructDiv(
-              res.message,
+              JSON.stringify(res.responseText).message,
               "confirm-forgot-password-validation-text"
             );
             break;
           default:
             constructDiv(
-              res.message,
+              JSON.stringify(res.responseText).message,
               "confirm-forgot-password-validation-text"
             );
             break;
@@ -130,17 +132,18 @@ const forgotPasswordFormSubmit = e => {
           case 201:
             alert("Yay");
             $("#loginForm").toggleClass("hidden");
-            $("#confirmPasswordChange").toggleClass("hidden");
+            $("#forgotPassword").toggleClass("hidden");
             break;
         }
       })
       .fail(res => {
+        alert(JSON.stringify(res))
         switch (res.status) {
           case 400:
-            constructDiv(res.message, "forgot-validation-text");
+            constructDiv(JSON.parse(res.responseText).message, "forgot-validation-text");
             break;
           default:
-            constructDiv(res.message, "forgot-validation-text");
+            constructDiv(JSON.parse(res.responseText).message, "forgot-validation-text");
             break;
         }
       });
@@ -174,10 +177,10 @@ const resendConfirmationCode = () => {
     .fail(res => {
       switch (res.status) {
         case 403:
-          constructDiv(res.message, "login-validation-text");
+          constructDiv(JSON.parse(res.responseText).message, "login-validation-text");
           break;
         default:
-          constructDiv(res.message, "login-validation-text");
+          constructDiv(JSON.parse(res.responseText).message, "login-validation-text");
           break;
       }
     });
@@ -209,7 +212,7 @@ const loginFormSubmit = e => {
       console.log(res.status);
       switch (res.status) {
         case 200:
-          window.location.replace("http://localhost:4200"); //TODO - Change url
+          window.location.replace(`http://localhost:4200/callback/auth/${JSON.parse(res.responseText).jwt}`); //TODO - Change url
           break;
       }
     })
@@ -281,10 +284,10 @@ const registerFormSubmit = e => {
         .fail(res => {
           switch (res.status) {
             case 400:
-              constructDiv(res.message, "register-validation-text");
+              constructDiv(JSON.parse(res.responseText).message, "register-validation-text");
               break;
             default:
-              constructDiv(res.message, "register-validation-text");
+              constructDiv(JSON.parse(res.responseText).message, "register-validation-text");
               break;
           }
         });
