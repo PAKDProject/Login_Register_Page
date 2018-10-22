@@ -1,5 +1,5 @@
 $(document).ready(() => {
-  let email;
+  let globalEmail;
 
   //Show or hide form based on selections on page
   $("#toggleRegisterPage").click(() => {
@@ -55,18 +55,18 @@ const confirmPasswordChangeFormSubmit = e => {
   } else {
     form.classList.add("was-validated");
 
-    email = document.getElementById("confirmEmail").value;
+    globalEmail = document.getElementById("confirmEmail").value;
 
     const apiUrl = "http://localhost:3000/auth/forgot/start"; //Enter endpoint
 
     $.post(apiUrl, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        data: JSON.stringify(email),
-        dataType: "json"
-      })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      data: JSON.stringify(globalEmail),
+      dataType: "json"
+    })
       .done((data, statusText, res) => {
         console.log(res.status);
         switch (res.status) {
@@ -109,7 +109,7 @@ const forgotPasswordFormSubmit = e => {
     form.classList.add("was-validated");
 
     const resetPasswordObject = {
-      email: email,
+      email: globalEmail,
       newPassword: postData.newPassword,
       confirmCode: postData.forgotPasswordCode
     };
@@ -117,13 +117,13 @@ const forgotPasswordFormSubmit = e => {
     const apiUrl = "http://localhost:3000/auth/forgot/verify"; //Enter endpoint
 
     $.post(apiUrl, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        data: JSON.stringify(resetPasswordObject),
-        dataType: "json"
-      })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      data: JSON.stringify(resetPasswordObject),
+      dataType: "json"
+    })
       .done((data, statusText, res) => {
         console.log(res.status);
         switch (res.status) {
@@ -149,17 +149,17 @@ const forgotPasswordFormSubmit = e => {
 };
 
 const resendConfirmationCode = () => {
-  email = postData.email;
-
   const apiUrl = "http://localhost:3000/auth/revalidate"
   $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      data: JSON.stringify(email),
-      dataType: "json"
-    })
+    headers: {
+      "Content-Type": "application/json"
+    },
+    type: "POST",
+    data: JSON.stringify({
+      email:globalEmail}
+    ),
+    dataType: "json"
+  })
     .done((data, statusText, res) => {
       console.log(res.status);
       switch (res.status) {
@@ -190,18 +190,19 @@ const loginFormSubmit = e => {
     password: postData.password
   };
 
+  globalEmail = postData.email
   console.log(loginObject);
 
   const apiUrl = "http://localhost:3000/auth/login";
 
   $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      data: JSON.stringify(loginObject),
-      dataType: "json"
-    })
+    headers: {
+      "Content-Type": "application/json"
+    },
+    type: "POST",
+    data: JSON.stringify(loginObject),
+    dataType: "json"
+  })
     .done((data, statusText, res) => {
       console.log(res.status);
       switch (res.status) {
@@ -211,9 +212,7 @@ const loginFormSubmit = e => {
       }
     })
     .fail(res => {
-
-      if (res.code === "UserNotConfirmedException") {
-
+      if (JSON.parse(res.responseText).code === "UserNotConfirmedException") {
         resendConfirmationCode();
       } else {
         switch (res.status) {
@@ -245,7 +244,7 @@ const registerFormSubmit = e => {
     form.classList.add("was-validated");
   } else {
     form.classList.add("was-validated");
-    email = postData.regEmail;
+    globalEmail = postData.regEmail;
 
     if (postData.regPassword !== postData.regPasswordRepeat) {
       constructDiv("Passwords do not match", "register-validation-text");
@@ -261,19 +260,19 @@ const registerFormSubmit = e => {
       const apiUrl = "http://localhost:3000/auth/register"; //Enter endpoint
 
       $.post(apiUrl, {
-          headers: {
-            "Content-Type": "application/json"
-          },
-          type: "POST",
-          data: JSON.stringify(registrationObject),
-          dataType: "json"
-        })
+        headers: {
+          "Content-Type": "application/json"
+        },
+        type: "POST",
+        data: JSON.stringify(registrationObject),
+        dataType: "json"
+      })
         .done((data, statusText, res) => {
           console.log(res.status);
           switch (res.status) {
             case 201:
-              alert("Yay");
-              //TODO - Move redirects in here
+              $("#registerForm").toggleClass("hidden");
+              $("#confirmationForm").toggleClass("hidden");
               break;
           }
         })
@@ -289,8 +288,7 @@ const registerFormSubmit = e => {
         });
 
       e.preventDefault();
-      $("#registerForm").toggleClass("hidden");
-      $("#confirmationForm").toggleClass("hidden");
+
     }
   }
 };
@@ -309,18 +307,18 @@ const confirmationFormSubmit = e => {
 
     var object = {
       confirmationCode,
-      email
+      email: globalEmail
     };
 
     console.log(JSON.stringify(object));
     $.post(apiUrl, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        data: JSON.stringify(object),
-        dataType: "json"
-      })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      data: JSON.stringify(object),
+      dataType: "json"
+    })
       .done((data, statusText, res) => {
         console.log(res.status);
         switch (res.status) {
