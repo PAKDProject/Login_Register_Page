@@ -56,6 +56,7 @@ const confirmPasswordChangeFormSubmit = e => {
     form.classList.add("was-validated");
 
     globalEmail = document.getElementById("confirmEmail").value;
+    alert(globalEmail)
 
     const apiUrl = "http://localhost:3000/auth/forgot/start"; //Enter endpoint
 
@@ -152,6 +153,7 @@ const forgotPasswordFormSubmit = e => {
 };
 
 const resendConfirmationCode = () => {
+  alert(globalEmail)
   const apiUrl = "http://localhost:3000/auth/revalidate"
   $.post(apiUrl, {
       headers: {
@@ -343,8 +345,7 @@ const confirmationFormSubmit = e => {
         }
       });
 
-    $("#loginForm").toggleClass("hidden");
-    $("#confirmationForm").toggleClass("hidden");
+
     e.preventDefault();
   }
 };

@@ -62,18 +62,21 @@ input[type="submit"],
 input[type="button"] {
   background-color: #12896e;
   color: white;
-  width: 50%;
+  width: 100%;
 }
+
 #confirmPasswordChangeSubmit {
   background-color: #12896e;
   color: white;
   width: 100%;
 }
+
 #confirmPasswordChangeSubmit:hover {
   background-color: white;
   color: #12896e;
   border: 1px solid #12896e;
 }
+
 input[type="button"]:hover,
 input[type="submit"]:hover {
   background-color: white;
