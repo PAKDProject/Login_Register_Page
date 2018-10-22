@@ -148,6 +148,39 @@ const forgotPasswordFormSubmit = e => {
   event.preventDefault();
 };
 
+const resendConfirmationCode = () => {
+  email = postData.email;
+
+  const apiUrl = "http://localhost:3000/auth/revalidate"
+  $.post(apiUrl, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      data: JSON.stringify(email),
+      dataType: "json"
+    })
+    .done((data, statusText, res) => {
+      console.log(res.status);
+      switch (res.status) {
+        case 200:
+          $("#loginForm").toggleClass("hidden");
+          $("#confirmationForm").toggleClass("hidden");
+          break;
+      }
+    })
+    .fail(res => {
+      switch (res.status) {
+        case 403:
+          constructDiv(res.message, "login-validation-text");
+          break;
+        default:
+          constructDiv(res.message, "login-validation-text");
+          break;
+      }
+    });
+
+}
 //Login flow
 const loginFormSubmit = e => {
   const postData = getFormData("formLogin");
@@ -180,49 +213,21 @@ const loginFormSubmit = e => {
     .fail(res => {
 
       if (res.code === "UserNotConfirmedException") {
-        email = postData.email;
 
-        const apiUrl = "http://localhost:3000/auth/revalidate"
-        $.post(apiUrl, {
-            headers: {
-              "Content-Type": "application/json"
-            },
-            type: "POST",
-            data: JSON.stringify(email),
-            dataType: "json"
-          })
-          .done((data, statusText, res) => {
-            console.log(res.status);
-            switch (res.status) {
-              case 200:
-                $("#registerForm").toggleClass("hidden");
-                $("#confirmationForm").toggleClass("hidden");
-                break;
-            }
-          })
-          .fail(res => {
-            switch (res.status) {
-              case 403:
-                constructDiv(res.message, "login-validation-text");
-                break;
-              default:
-                constructDiv(res.message, "login-validation-text");
-                break;
-            }
-          });
+        resendConfirmationCode();
+      } else {
+        switch (res.status) {
+          case 403:
+            constructDiv(
+              JSON.parse(res.responseText).message,
+              "login-validation-text"
+            );
 
-      }
-      switch (res.status) {
-        case 403:
-          constructDiv(
-            JSON.parse(res.responseText).message,
-            "login-validation-text"
-          );
-
-          break;
-        default:
-          constructDiv("Login Failed", "login-validation-text");
-          break;
+            break;
+          default:
+            constructDiv("Login Failed", "login-validation-text");
+            break;
+        }
       }
     });
 
