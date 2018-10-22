@@ -57,20 +57,20 @@ const confirmPasswordChangeFormSubmit = e => {
 
     email = document.getElementById("confirmEmail").value;
 
-    const apiUrl = "http://localhost:3000/auth/forgotPasswordStart"; //Enter endpoint
+    const apiUrl = "http://localhost:3000/auth/forgot/start"; //Enter endpoint
 
     $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      data: JSON.stringify(email),
-      dataType: "json"
-    })
+        headers: {
+          "Content-Type": "application/json"
+        },
+        type: "POST",
+        data: JSON.stringify(email),
+        dataType: "json"
+      })
       .done((data, statusText, res) => {
         console.log(res.status);
         switch (res.status) {
-          case 201:
+          case 200:
             $("#confirmPasswordChange").toggleClass("hidden");
             $("#forgotPassword").toggleClass("hidden");
             break;
@@ -114,16 +114,16 @@ const forgotPasswordFormSubmit = e => {
       confirmCode: postData.forgotPasswordCode
     };
 
-    const apiUrl = "http://localhost:3000/auth/forgotPasswordComplete"; //Enter endpoint
+    const apiUrl = "http://localhost:3000/auth/forgot/verify"; //Enter endpoint
 
     $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      data: JSON.stringify(resetPasswordObject),
-      dataType: "json"
-    })
+        headers: {
+          "Content-Type": "application/json"
+        },
+        type: "POST",
+        data: JSON.stringify(resetPasswordObject),
+        dataType: "json"
+      })
       .done((data, statusText, res) => {
         console.log(res.status);
         switch (res.status) {
@@ -162,13 +162,13 @@ const loginFormSubmit = e => {
   const apiUrl = "http://localhost:3000/auth/login";
 
   $.post(apiUrl, {
-    headers: {
-      "Content-Type": "application/json"
-    },
-    type: "POST",
-    data: JSON.stringify(loginObject),
-    dataType: "json"
-  })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      data: JSON.stringify(loginObject),
+      dataType: "json"
+    })
     .done((data, statusText, res) => {
       console.log(res.status);
       switch (res.status) {
@@ -178,12 +178,47 @@ const loginFormSubmit = e => {
       }
     })
     .fail(res => {
+
+      if (res.code === "UserNotConfirmedException") {
+        email = postData.email;
+
+        const apiUrl = "http://localhost:3000/auth/revalidate"
+        $.post(apiUrl, {
+            headers: {
+              "Content-Type": "application/json"
+            },
+            type: "POST",
+            data: JSON.stringify(email),
+            dataType: "json"
+          })
+          .done((data, statusText, res) => {
+            console.log(res.status);
+            switch (res.status) {
+              case 200:
+                $("#registerForm").toggleClass("hidden");
+                $("#confirmationForm").toggleClass("hidden");
+                break;
+            }
+          })
+          .fail(res => {
+            switch (res.status) {
+              case 403:
+                constructDiv(res.message, "login-validation-text");
+                break;
+              default:
+                constructDiv(res.message, "login-validation-text");
+                break;
+            }
+          });
+
+      }
       switch (res.status) {
         case 403:
           constructDiv(
             JSON.parse(res.responseText).message,
             "login-validation-text"
           );
+
           break;
         default:
           constructDiv("Login Failed", "login-validation-text");
@@ -221,13 +256,13 @@ const registerFormSubmit = e => {
       const apiUrl = "http://localhost:3000/auth/register"; //Enter endpoint
 
       $.post(apiUrl, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        data: JSON.stringify(registrationObject),
-        dataType: "json"
-      })
+          headers: {
+            "Content-Type": "application/json"
+          },
+          type: "POST",
+          data: JSON.stringify(registrationObject),
+          dataType: "json"
+        })
         .done((data, statusText, res) => {
           console.log(res.status);
           switch (res.status) {
@@ -274,13 +309,13 @@ const confirmationFormSubmit = e => {
 
     console.log(JSON.stringify(object));
     $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      data: JSON.stringify(object),
-      dataType: "json"
-    })
+        headers: {
+          "Content-Type": "application/json"
+        },
+        type: "POST",
+        data: JSON.stringify(object),
+        dataType: "json"
+      })
       .done((data, statusText, res) => {
         console.log(res.status);
         switch (res.status) {
