@@ -1,5 +1,7 @@
 $(document).ready(() => {
   let globalEmail;
+  sendCookieResponse();
+
 
   //Show or hide form based on selections on page
   $("#toggleRegisterPage").click(() => {
@@ -44,6 +46,28 @@ $(document).ready(() => {
   });
 });
 
+//Send first request for autologin
+const sendCookieResponse = () => {
+  const apiUrl = "http://localhost:3000/auth/login";
+  $.post(apiUrl, {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    crossDomain: true,
+    xhrFields: {
+      withCredentials: true
+    },
+    type: "POST"
+  })
+    .done((data, statusText, res) => {
+      console.log(JSON.stringify(res))
+      switch (res.status) {
+        case 200:
+          window.location.replace(`http://localhost:4200/callback/auth?access_token=${JSON.parse(res.responseText).tokens.access_token}&id_token=${JSON.parse(res.responseText).tokens.id_token}`); //TODO - Change url
+          break;
+      }
+    })
+}
 //Forgot password flow start
 const confirmPasswordChangeFormSubmit = e => {
   const form = document.getElementById("confirmPasswordChangeForm");
@@ -61,15 +85,15 @@ const confirmPasswordChangeFormSubmit = e => {
     const apiUrl = "http://localhost:3000/auth/forgot/start"; //Enter endpoint
 
     $.post(apiUrl, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        data: JSON.stringify({
-          email: globalEmail
-        }),
-        dataType: "json"
-      })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      data: JSON.stringify({
+        email: globalEmail
+      }),
+      dataType: "json"
+    })
       .done((data, statusText, res) => {
         console.log(res.status);
         switch (res.status) {
@@ -120,13 +144,13 @@ const forgotPasswordFormSubmit = e => {
     const apiUrl = "http://localhost:3000/auth/forgot/verify"; //Enter endpoint
 
     $.post(apiUrl, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        data: JSON.stringify(resetPasswordObject),
-        dataType: "json"
-      })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      data: JSON.stringify(resetPasswordObject),
+      dataType: "json"
+    })
       .done((data, statusText, res) => {
         console.log(res.status);
         switch (res.status) {
@@ -156,15 +180,15 @@ const resendConfirmationCode = () => {
   alert(globalEmail)
   const apiUrl = "http://localhost:3000/auth/revalidate"
   $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      data: JSON.stringify({
-        email: globalEmail
-      }),
-      dataType: "json"
-    })
+    headers: {
+      "Content-Type": "application/json"
+    },
+    type: "POST",
+    data: JSON.stringify({
+      email: globalEmail
+    }),
+    dataType: "json"
+  })
     .done((data, statusText, res) => {
       console.log(res.status);
       switch (res.status) {
@@ -203,18 +227,21 @@ const loginFormSubmit = e => {
   const apiUrl = "http://localhost:3000/auth/login";
 
   $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      data: JSON.stringify(loginObject),
-      dataType: "json"
-    })
+    headers: {
+      "Content-Type": "application/json"
+    },
+    type: "POST",
+    crossDomain: true,
+    xhrFields: {
+      withCredentials: true
+    },
+    data: JSON.stringify(loginObject),
+    dataType: "json"
+  })
     .done((data, statusText, res) => {
-      console.log(res.status);
       switch (res.status) {
         case 200:
-          window.location.replace(`http://localhost:4200/callback/auth/${JSON.parse(res.responseText).jwt}`); //TODO - Change url
+          window.location.replace(`http://localhost:4200/callback/auth?access_token=${JSON.parse(res.responseText).tokens.access_token}&id_token=${JSON.parse(res.responseText).tokens.id_token}`); //TODO - Change url
           break;
       }
     })
@@ -267,13 +294,13 @@ const registerFormSubmit = e => {
       const apiUrl = "http://localhost:3000/auth/register"; //Enter endpoint
 
       $.post(apiUrl, {
-          headers: {
-            "Content-Type": "application/json"
-          },
-          type: "POST",
-          data: JSON.stringify(registrationObject),
-          dataType: "json"
-        })
+        headers: {
+          "Content-Type": "application/json"
+        },
+        type: "POST",
+        data: JSON.stringify(registrationObject),
+        dataType: "json"
+      })
         .done((data, statusText, res) => {
           console.log(res.status);
           switch (res.status) {
@@ -319,13 +346,13 @@ const confirmationFormSubmit = e => {
 
     console.log(JSON.stringify(object));
     $.post(apiUrl, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        data: JSON.stringify(object),
-        dataType: "json"
-      })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      data: JSON.stringify(object),
+      dataType: "json"
+    })
       .done((data, statusText, res) => {
         console.log(res.status);
         switch (res.status) {
