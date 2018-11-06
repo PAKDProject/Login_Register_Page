@@ -357,7 +357,8 @@ const confirmationFormSubmit = e => {
         console.log(res.status);
         switch (res.status) {
           case 201:
-            window.location.replace("https://google.ie"); //TODO - Enter angular app location
+            $("#loginForm").toggleClass("hidden");
+            $("#confirmationForm").toggleClass("hidden");
             break;
         }
       })
