@@ -1,6 +1,6 @@
 $(document).ready(() => {
   let globalEmail;
-  sendCookieResponse();
+  //sendCookieResponse();
 
 
   //Show or hide form based on selections on page
