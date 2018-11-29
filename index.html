@@ -14,198 +14,204 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row" id="top-row">
-            <!--SideBar Section-->
-            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-xs-12" id="form-area">
-                <!--Logo Section-->
-                <div class="row" id="logo">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <a href="index.html"><img src="./images/FullLogo.png" width="90%"></a>
-                    </div>
-                </div>
-                <!-- Login Form -->
-                <div id="loginForm">
-                    <div class="row">
+    <div class="background">
+        <div class="container">
+            <div class="row" id="top-row">
+                <!--SideBar Section-->
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-xs-12" id="form-area">
+                    <!--Logo Section-->
+                    <div class="row" id="logo">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <form novalidate='' id="formLogin">
-                                <div class="form-group">
-                                    <label for="email">Email address</label>
-                                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
-                                        placeholder="Enter email" name="email">
-                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email
-                                        with anyone else.</small>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password <a href="#" class="floated-right" id="toggleForgotPassword">Forgot
-                                            Password</a></label>
-                                    <input type="password" class="form-control" id="password" placeholder="Password"
-                                        name="password">
-                                </div>
-                                <div id="login-validation-text"></div>
-                                <input type="submit" class="btn float-right" id="loginFormSubmit" value="Login" />
-                            </form>
+                            <a href="index.html"><img src="./images/FullLogo.png" width="90%"></a>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                            <p id="bottomMessage">Don't have an account yet? <a href="#" id="toggleRegisterPage" class="register">Register
-                                    Now</a></p>
+                    <!-- Login Form -->
+                    <div id="loginForm">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <form novalidate='' id="formLogin">
+                                    <div class="form-group">
+                                        <label for="email">Email address</label>
+                                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                                            placeholder="Enter email" name="email">
+                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email
+                                            with anyone else.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password <a href="#" class="floated-right" id="toggleForgotPassword">Forgot
+                                                Password</a></label>
+                                        <input type="password" class="form-control" id="password" placeholder="Password"
+                                            name="password">
+                                    </div>
+                                    <div id="login-validation-text"></div>
+                                    <input type="submit" class="btn float-right" id="loginFormSubmit" value="Login" />
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                                <p id="bottomMessage">Don't have an account yet? <a href="#" id="toggleRegisterPage"
+                                        class="register">Register
+                                        Now</a></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- Registration Form -->
-                <div class="hidden" id="registerForm">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <form novalidate='' class="needs-validation" id="formRegister">
-                                <div class="form-row">
-                                    <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                        <label for="fName">First Name</label>
-                                        <input type="text" class="form-control" id="regFName" aria-describedby="firstName"
-                                            placeholder="Joe" required name="regFName">
+                    <!-- Registration Form -->
+                    <div class="hidden" id="registerForm">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <form novalidate='' class="needs-validation" id="formRegister">
+                                    <div class="form-row">
+                                        <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                            <label for="fName">First Name</label>
+                                            <input type="text" class="form-control" id="regFName" aria-describedby="firstName"
+                                                placeholder="Joe" required name="regFName">
 
-                                        <div class="invalid-feedback">
-                                            Please enter your first name
+                                            <div class="invalid-feedback">
+                                                Please enter your first name
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                            <label for="sName">Last Name</label>
+                                            <input type="text" class="form-control" id="regSName" aria-describedby="lastName"
+                                                placeholder="Sample" required name="regSName">
+
+                                            <div class="invalid-feedback">
+                                                Please enter your last name
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                        <label for="sName">Last Name</label>
-                                        <input type="text" class="form-control" id="regSName" aria-describedby="lastName"
-                                            placeholder="Sample" required name="regSName">
+                                    <div class="form-row">
+                                        <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            <label for="email">Email Address</label>
+                                            <input type="email" class="form-control" id="regEmail" placeholder="Email"
+                                                required name="regEmail">
 
-                                        <div class="invalid-feedback">
-                                            Please enter your last name
+                                            <div class="invalid-feedback">
+                                                Please enter a valid email
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                        <label for="email">Email Address</label>
-                                        <input type="email" class="form-control" id="regEmail" placeholder="Email"
-                                            required name="regEmail">
+                                    <div class="form-row">
+                                        <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" id="regPassword" placeholder="Password"
+                                                required minlength="8" name="regPassword">
 
-                                        <div class="invalid-feedback">
-                                            Please enter a valid email
+                                            <div class="invalid-feedback">
+                                                Password must be 8 characters long and contain both an uppercase letter
+                                                and
+                                                a number
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                        <label for="password">Password</label>
-                                        <input type="password" class="form-control" id="regPassword" placeholder="Password"
-                                            required minlength="8" name="regPassword">
-
-                                        <div class="invalid-feedback">
-                                            Password must be 8 characters long and contain both an uppercase letter and
-                                            a number
+                                    <div class="form-row">
+                                        <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            <label for="re-pass">Re-enter Password</label>
+                                            <input type="password" class="form-control" id="re-pass" placeholder="Password"
+                                                required minlength="8" name="regPasswordRepeat">
+                                            <div class="invalid-feedback">
+                                                Password must be 8 characters long and contain both an uppercase letter
+                                                and
+                                                a number
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                        <label for="re-pass">Re-enter Password</label>
-                                        <input type="password" class="form-control" id="re-pass" placeholder="Password"
-                                            required minlength="8" name="regPasswordRepeat">
-                                        <div class="invalid-feedback">
-                                            Password must be 8 characters long and contain both an uppercase letter and
-                                            a number
+                                    <div id="register-validation-text"></div>
+                                    <div class="form-row">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 float-right">
+                                            <input type="submit" class="btn float-right" id="registerFormSubmit" value="Submit" />
                                         </div>
                                     </div>
-                                </div>
-                                <div id="register-validation-text"></div>
-                                <div class="form-row">
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 float-right">
-                                        <input type="submit" class="btn float-right" id="registerFormSubmit" value="Submit" />
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                            <a href="#" class="register" id="alreadyHaveAccount">Already have an account?</a>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                                <a href="#" class="register" id="alreadyHaveAccount">Already have an account?</a>
+                            </div>
                         </div>
+
                     </div>
+                    <!-- Confirmation Form -->
+                    <div class="hidden" id="confirmationForm">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div id="confirmation-message"></div>
+                                <form novalidate='' id="formConfirm">
+                                    <div class="form-row">
+                                        <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
-                </div>
-                <!-- Confirmation Form -->
-                <div class="hidden" id="confirmationForm">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div id="confirmation-message"></div>
-                            <form novalidate='' id="formConfirm">
-                                <div class="form-row">
-                                    <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12">
-
-                                        <label for="confirmationCode">Confirmation Code
-                                            <!--<a href="#" class="floated-right">Resend
+                                            <label for="confirmationCode">Confirmation Code
+                                                <!--<a href="#" class="floated-right">Resend
                                                 Code</a> --></label>
-                                        <input type="text" class="form-control" id="confirmationCode" name="confirmationCode"
-                                            placeholder="Confirmation Code" required>
-                                        <div class="invalid-feedback">
-                                            Please enter the validation code emailed to you
+                                            <input type="text" class="form-control" id="confirmationCode" name="confirmationCode"
+                                                placeholder="Confirmation Code" required>
+                                            <div class="invalid-feedback">
+                                                Please enter the validation code emailed to you
+                                            </div>
+                                            <small id="confirmMessage" class="form-text text-muted">A confirmation code
+                                                has
+                                                been sent to your email address.</small>
                                         </div>
-                                        <small id="confirmMessage" class="form-text text-muted">A confirmation code has
-                                            been sent to your email address.</small>
                                     </div>
-                                </div>
-                                <div id="confirmation-validation-text"></div>
-                                <div class="form-row">
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 float-right">
-                                        <input type="submit" class="btn float-right" id="confirmFormSubmit" value="Confirm Account" />
+                                    <div id="confirmation-validation-text"></div>
+                                    <div class="form-row">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 float-right">
+                                            <input type="submit" class="btn float-right" id="confirmFormSubmit" value="Confirm Account" />
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- Confirm password change request -->
-                <div class="hidden" id="confirmPasswordChange">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <h5>Please enter your email in order to change your password</h5>
-                            <form novalidate='' id="confirmPasswordChangeForm">
-                                <div class="form-group">
-                                    <label for="confirmEmail">Email</label>
-                                    <input type="email" class="form-control" id="confirmEmail" required placeholder="Email assosciated with your account"
-                                        name="confirmEmail">
-                                    <div class="invalid-feedback">
-                                        Please enter a valid email address assosciated with an account
+                    <!-- Confirm password change request -->
+                    <div class="hidden" id="confirmPasswordChange">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <h5>Please enter your email in order to change your password</h5>
+                                <form novalidate='' id="confirmPasswordChangeForm">
+                                    <div class="form-group">
+                                        <label for="confirmEmail">Email</label>
+                                        <input type="email" class="form-control" id="confirmEmail" required placeholder="Email assosciated with your account"
+                                            name="confirmEmail">
+                                        <div class="invalid-feedback">
+                                            Please enter a valid email address assosciated with an account
+                                        </div>
+                                        <div id="confirm-forgot-password-validation-text"></div>
                                     </div>
-                                    <div id="confirm-forgot-password-validation-text"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <input type="button" class="btn" id="confirmReturnToLogin" value="Back" />
+                                    <div class="row">
+                                        <div class="col">
+                                            <input type="button" class="btn" id="confirmReturnToLogin" value="Back" />
+                                        </div>
+                                        <div class="col">
+                                            <input type="submit" class="btn" id="confirmPasswordChangeSubmit" value="Send Code" />
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <input type="submit" class="btn" id="confirmPasswordChangeSubmit" value="Send Code" />
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- Forgot password form -->
-                <div class="hidden" id="forgotPassword">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <form novalidate='' id="formForgotPassword">
-                                <div class="form-group">
-                                    <label for="newPassword">New Password</label>
-                                    <input type="password" class="form-control" id="newPassword" placeholder="New Password"
-                                        name="newPassword">
-                                </div>
-                                <div class="form-group">
-                                    <label for="forgotPasswordCode">Enter confirmation code</label>
-                                    <input type="text" class="form-control" id="forgotPasswordCode" placeholder="A code was sent to your email"
-                                        name="forgotPasswordCode">
-                                </div>
-                                <div id="forgot-validation-text"></div>
-                                <input type="submit" class="btn float-right" id="forgotPasswordSubmit" value="Reset Password" />
-                            </form>
+                    <!-- Forgot password form -->
+                    <div class="hidden" id="forgotPassword">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <form novalidate='' id="formForgotPassword">
+                                    <div class="form-group">
+                                        <label for="newPassword">New Password</label>
+                                        <input type="password" class="form-control" id="newPassword" placeholder="New Password"
+                                            name="newPassword">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="forgotPasswordCode">Enter confirmation code</label>
+                                        <input type="text" class="form-control" id="forgotPasswordCode" placeholder="A code was sent to your email"
+                                            name="forgotPasswordCode">
+                                    </div>
+                                    <div id="forgot-validation-text"></div>
+                                    <input type="submit" class="btn float-right" id="forgotPasswordSubmit" value="Reset Password" />
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
