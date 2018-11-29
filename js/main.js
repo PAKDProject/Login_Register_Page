@@ -48,7 +48,7 @@ $(document).ready(() => {
 
 //Send first request for autologin
 const sendCookieResponse = () => {
-  const apiUrl = "http://localhost:3000/auth/login";
+  const apiUrl = "https://api.elance.site/auth/login";
   $.post(apiUrl, {
     headers: {
       "Content-Type": "application/json"
@@ -63,7 +63,7 @@ const sendCookieResponse = () => {
       console.log(JSON.stringify(res))
       switch (res.status) {
         case 200:
-          window.location.replace(`http://localhost:4200/callback/auth?access_token=${JSON.parse(res.responseText).tokens.access_token}&id_token=${JSON.parse(res.responseText).tokens.id_token}`); //TODO - Change url
+          window.location.replace(`https://login.elance.site/callback/auth?access_token=${JSON.parse(res.responseText).tokens.access_token}&id_token=${JSON.parse(res.responseText).tokens.id_token}`); //TODO - Change url
           break;
       }
     })
@@ -82,7 +82,7 @@ const confirmPasswordChangeFormSubmit = e => {
     globalEmail = document.getElementById("confirmEmail").value;
     alert(globalEmail)
 
-    const apiUrl = "http://localhost:3000/auth/forgot/start"; //Enter endpoint
+    const apiUrl = "https://api.elance.site/auth/forgot/start"; //Enter endpoint
 
     $.post(apiUrl, {
       headers: {
@@ -141,7 +141,7 @@ const forgotPasswordFormSubmit = e => {
       confirmCode: postData.forgotPasswordCode
     };
 
-    const apiUrl = "http://localhost:3000/auth/forgot/verify"; //Enter endpoint
+    const apiUrl = "https://api.elance.site/auth/forgot/verify"; //Enter endpoint
 
     $.post(apiUrl, {
       headers: {
@@ -178,7 +178,7 @@ const forgotPasswordFormSubmit = e => {
 
 const resendConfirmationCode = () => {
   alert(globalEmail)
-  const apiUrl = "http://localhost:3000/auth/revalidate"
+  const apiUrl = "https://api.elance.site/auth/revalidate"
   $.post(apiUrl, {
     headers: {
       "Content-Type": "application/json"
@@ -224,7 +224,7 @@ const loginFormSubmit = e => {
   globalEmail = postData.email
   console.log(loginObject);
 
-  const apiUrl = "http://localhost:3000/auth/login";
+  const apiUrl = "https://api.elance.site/auth/login";
 
   $.post(apiUrl, {
     headers: {
@@ -241,7 +241,7 @@ const loginFormSubmit = e => {
     .done((data, statusText, res) => {
       switch (res.status) {
         case 200:
-          window.location.replace(`http://localhost:4200/callback/auth?access_token=${JSON.parse(res.responseText).tokens.access_token}&id_token=${JSON.parse(res.responseText).tokens.id_token}`); //TODO - Change url
+          window.location.replace(`https://login.elance.site/callback/auth?access_token=${JSON.parse(res.responseText).tokens.access_token}&id_token=${JSON.parse(res.responseText).tokens.id_token}`); //TODO - Change url
           break;
       }
     })
@@ -291,7 +291,7 @@ const registerFormSubmit = e => {
       };
       console.log(registrationObject);
 
-      const apiUrl = "http://localhost:3000/auth/register"; //Enter endpoint
+      const apiUrl = "https://api.elance.site/auth/register"; //Enter endpoint
 
       $.post(apiUrl, {
         headers: {
@@ -337,7 +337,7 @@ const confirmationFormSubmit = e => {
     form.classList.add("was-validated");
   } else {
     const confirmationCode = postData.confirmationCode;
-    const apiUrl = "http://localhost:3000/auth/confirm"; //endpoint
+    const apiUrl = "https://api.elance.site/auth/confirm"; //endpoint
 
     var object = {
       confirmationCode,
