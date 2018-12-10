@@ -123,6 +123,16 @@ input[type="submit"]:hover {
   font-weight: lighter;
 }
 
+#privacy {
+  font-size: 0.8em;
+
+
+}
+
+#privacy a {
+  color: #12896e;
+}
+
 /*sm screen size */
 @media (max-width: 576px) {
   #top-row {

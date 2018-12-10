@@ -44,21 +44,25 @@ $(document).ready(() => {
   $("#formForgotPassword").submit(e => {
     forgotPasswordFormSubmit(e);
   });
+
+  $("#privacyCheck").click(() => {
+    privacyAgreed();
+  })
 });
 
 //Send first request for autologin
 const sendCookieResponse = () => {
   const apiUrl = "https://api.elance.site/auth/login";
   $.post(apiUrl, {
-    headers: {
-      "Content-Type": "application/json"
-    },
-    crossDomain: true,
-    xhrFields: {
-      withCredentials: true
-    },
-    type: "POST"
-  })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      crossDomain: true,
+      xhrFields: {
+        withCredentials: true
+      },
+      type: "POST"
+    })
     .done((data, statusText, res) => {
       console.log(JSON.stringify(res))
       switch (res.status) {
@@ -85,15 +89,15 @@ const confirmPasswordChangeFormSubmit = e => {
     const apiUrl = "https://api.elance.site/auth/forgot/start"; //Enter endpoint
 
     $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      data: JSON.stringify({
-        email: globalEmail
-      }),
-      dataType: "json"
-    })
+        headers: {
+          "Content-Type": "application/json"
+        },
+        type: "POST",
+        data: JSON.stringify({
+          email: globalEmail
+        }),
+        dataType: "json"
+      })
       .done((data, statusText, res) => {
         console.log(res.status);
         switch (res.status) {
@@ -144,13 +148,13 @@ const forgotPasswordFormSubmit = e => {
     const apiUrl = "https://api.elance.site/auth/forgot/verify"; //Enter endpoint
 
     $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      data: JSON.stringify(resetPasswordObject),
-      dataType: "json"
-    })
+        headers: {
+          "Content-Type": "application/json"
+        },
+        type: "POST",
+        data: JSON.stringify(resetPasswordObject),
+        dataType: "json"
+      })
       .done((data, statusText, res) => {
         console.log(res.status);
         switch (res.status) {
@@ -180,15 +184,15 @@ const resendConfirmationCode = () => {
   alert(globalEmail)
   const apiUrl = "https://api.elance.site/auth/revalidate"
   $.post(apiUrl, {
-    headers: {
-      "Content-Type": "application/json"
-    },
-    type: "POST",
-    data: JSON.stringify({
-      email: globalEmail
-    }),
-    dataType: "json"
-  })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      data: JSON.stringify({
+        email: globalEmail
+      }),
+      dataType: "json"
+    })
     .done((data, statusText, res) => {
       console.log(res.status);
       switch (res.status) {
@@ -227,17 +231,17 @@ const loginFormSubmit = e => {
   const apiUrl = "https://api.elance.site/auth/login";
 
   $.post(apiUrl, {
-    headers: {
-      "Content-Type": "application/json"
-    },
-    type: "POST",
-    crossDomain: true,
-    xhrFields: {
-      withCredentials: true
-    },
-    data: JSON.stringify(loginObject),
-    dataType: "json"
-  })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      crossDomain: true,
+      xhrFields: {
+        withCredentials: true
+      },
+      data: JSON.stringify(loginObject),
+      dataType: "json"
+    })
     .done((data, statusText, res) => {
       switch (res.status) {
         case 200:
@@ -267,8 +271,17 @@ const loginFormSubmit = e => {
   e.preventDefault();
 };
 
+const privacyAgreed = () => {
+  const privacyAgreed = document.getElementById("privacyCheck").checked;
+  if (!privacyAgreed) {
+    document.getElementById("registerFormSubmit").disabled = true;
+  } else {
+    document.getElementById("registerFormSubmit").disabled = false;
+  }
+}
 //Register for app flow start
 const registerFormSubmit = e => {
+
   const form = document.getElementById("formRegister");
   const postData = getFormData("formRegister");
   event.preventDefault();
@@ -279,6 +292,7 @@ const registerFormSubmit = e => {
   } else {
     form.classList.add("was-validated");
     globalEmail = postData.regEmail;
+
 
     if (postData.regPassword !== postData.regPasswordRepeat) {
       constructDiv("Passwords do not match", "register-validation-text");
@@ -294,13 +308,13 @@ const registerFormSubmit = e => {
       const apiUrl = "https://api.elance.site/auth/register"; //Enter endpoint
 
       $.post(apiUrl, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        data: JSON.stringify(registrationObject),
-        dataType: "json"
-      })
+          headers: {
+            "Content-Type": "application/json"
+          },
+          type: "POST",
+          data: JSON.stringify(registrationObject),
+          dataType: "json"
+        })
         .done((data, statusText, res) => {
           console.log(res.status);
           switch (res.status) {
@@ -346,13 +360,13 @@ const confirmationFormSubmit = e => {
 
     console.log(JSON.stringify(object));
     $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      data: JSON.stringify(object),
-      dataType: "json"
-    })
+        headers: {
+          "Content-Type": "application/json"
+        },
+        type: "POST",
+        data: JSON.stringify(object),
+        dataType: "json"
+      })
       .done((data, statusText, res) => {
         console.log(res.status);
         switch (res.status) {
