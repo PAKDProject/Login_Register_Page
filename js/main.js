@@ -1,6 +1,6 @@
 $(document).ready(() => {
   let globalEmail;
-  //sendCookieResponse();
+  sendCookieResponse();
 
 
   //Show or hide form based on selections on page
@@ -67,7 +67,7 @@ const sendCookieResponse = () => {
       console.log(JSON.stringify(res))
       switch (res.status) {
         case 200:
-          window.location.replace(`https://login.elance.site/callback/auth?access_token=${JSON.parse(res.responseText).tokens.access_token}&id_token=${JSON.parse(res.responseText).tokens.id_token}`); //TODO - Change url
+          window.location.replace(`https://app.elance.site/callback/auth?access_token=${JSON.parse(res.responseText).tokens.access_token}&id_token=${JSON.parse(res.responseText).tokens.id_token}`); //TODO - Change url
           break;
       }
     })
@@ -245,7 +245,7 @@ const loginFormSubmit = e => {
     .done((data, statusText, res) => {
       switch (res.status) {
         case 200:
-          window.location.replace(`https://login.elance.site/callback/auth?access_token=${JSON.parse(res.responseText).tokens.access_token}&id_token=${JSON.parse(res.responseText).tokens.id_token}`); //TODO - Change url
+          window.location.replace(`https://app.elance.site/callback/auth?access_token=${JSON.parse(res.responseText).tokens.access_token}&id_token=${JSON.parse(res.responseText).tokens.id_token}`); //TODO - Change url
           break;
       }
     })
