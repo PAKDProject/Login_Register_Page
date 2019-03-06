@@ -52,22 +52,22 @@ $(document).ready(() => {
 
 //Send first request for autologin
 const sendCookieResponse = () => {
-  const apiUrl = "https://api.elance.site/auth/login";
+  const apiUrl = "https://api.intellilance.com/auth/login";
   $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      crossDomain: true,
-      xhrFields: {
-        withCredentials: true
-      },
-      type: "POST"
-    })
+    headers: {
+      "Content-Type": "application/json"
+    },
+    crossDomain: true,
+    xhrFields: {
+      withCredentials: true
+    },
+    type: "POST"
+  })
     .done((data, statusText, res) => {
       console.log(JSON.stringify(res))
       switch (res.status) {
         case 200:
-          window.location.replace(`https://app.elance.site/callback/auth?access_token=${JSON.parse(res.responseText).tokens.access_token}&id_token=${JSON.parse(res.responseText).tokens.id_token}`); //TODO - Change url
+          window.location.replace(`https://app.intellilance.com/callback/auth?access_token=${JSON.parse(res.responseText).tokens.access_token}&id_token=${JSON.parse(res.responseText).tokens.id_token}`); //TODO - Change url
           break;
       }
     })
@@ -86,18 +86,18 @@ const confirmPasswordChangeFormSubmit = e => {
     globalEmail = document.getElementById("confirmEmail").value;
     alert(globalEmail)
 
-    const apiUrl = "https://api.elance.site/auth/forgot/start"; //Enter endpoint
+    const apiUrl = "https://api.intellilance.com/auth/forgot/start"; //Enter endpoint
 
     $.post(apiUrl, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        data: JSON.stringify({
-          email: globalEmail
-        }),
-        dataType: "json"
-      })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      data: JSON.stringify({
+        email: globalEmail
+      }),
+      dataType: "json"
+    })
       .done((data, statusText, res) => {
         console.log(res.status);
         switch (res.status) {
@@ -145,16 +145,16 @@ const forgotPasswordFormSubmit = e => {
       confirmCode: postData.forgotPasswordCode
     };
 
-    const apiUrl = "https://api.elance.site/auth/forgot/verify"; //Enter endpoint
+    const apiUrl = "https://api.intellilance.com/auth/forgot/verify"; //Enter endpoint
 
     $.post(apiUrl, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        data: JSON.stringify(resetPasswordObject),
-        dataType: "json"
-      })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      data: JSON.stringify(resetPasswordObject),
+      dataType: "json"
+    })
       .done((data, statusText, res) => {
         console.log(res.status);
         switch (res.status) {
@@ -182,17 +182,17 @@ const forgotPasswordFormSubmit = e => {
 
 const resendConfirmationCode = () => {
   alert(globalEmail)
-  const apiUrl = "https://api.elance.site/auth/revalidate"
+  const apiUrl = "https://api.intellilance.com/auth/revalidate"
   $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      data: JSON.stringify({
-        email: globalEmail
-      }),
-      dataType: "json"
-    })
+    headers: {
+      "Content-Type": "application/json"
+    },
+    type: "POST",
+    data: JSON.stringify({
+      email: globalEmail
+    }),
+    dataType: "json"
+  })
     .done((data, statusText, res) => {
       console.log(res.status);
       switch (res.status) {
@@ -228,24 +228,24 @@ const loginFormSubmit = e => {
   globalEmail = postData.email
   console.log(loginObject);
 
-  const apiUrl = "https://api.elance.site/auth/login";
+  const apiUrl = "https://api.intellilance.com/auth/login";
 
   $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      crossDomain: true,
-      xhrFields: {
-        withCredentials: true
-      },
-      data: JSON.stringify(loginObject),
-      dataType: "json"
-    })
+    headers: {
+      "Content-Type": "application/json"
+    },
+    type: "POST",
+    crossDomain: true,
+    xhrFields: {
+      withCredentials: true
+    },
+    data: JSON.stringify(loginObject),
+    dataType: "json"
+  })
     .done((data, statusText, res) => {
       switch (res.status) {
         case 200:
-          window.location.replace(`https://app.elance.site/callback/auth?access_token=${JSON.parse(res.responseText).tokens.access_token}&id_token=${JSON.parse(res.responseText).tokens.id_token}`); //TODO - Change url
+          window.location.replace(`https://app.intellilance.com/callback/auth?access_token=${JSON.parse(res.responseText).tokens.access_token}&id_token=${JSON.parse(res.responseText).tokens.id_token}`); //TODO - Change url
           break;
       }
     })
@@ -305,16 +305,16 @@ const registerFormSubmit = e => {
       };
       console.log(registrationObject);
 
-      const apiUrl = "https://api.elance.site/auth/register"; //Enter endpoint
+      const apiUrl = "https://api.intellilance.com/auth/register"; //Enter endpoint
 
       $.post(apiUrl, {
-          headers: {
-            "Content-Type": "application/json"
-          },
-          type: "POST",
-          data: JSON.stringify(registrationObject),
-          dataType: "json"
-        })
+        headers: {
+          "Content-Type": "application/json"
+        },
+        type: "POST",
+        data: JSON.stringify(registrationObject),
+        dataType: "json"
+      })
         .done((data, statusText, res) => {
           console.log(res.status);
           switch (res.status) {
@@ -351,7 +351,7 @@ const confirmationFormSubmit = e => {
     form.classList.add("was-validated");
   } else {
     const confirmationCode = postData.confirmationCode;
-    const apiUrl = "https://api.elance.site/auth/confirm"; //endpoint
+    const apiUrl = "https://api.intellilance.com/auth/confirm"; //endpoint
 
     var object = {
       confirmationCode,
@@ -360,13 +360,13 @@ const confirmationFormSubmit = e => {
 
     console.log(JSON.stringify(object));
     $.post(apiUrl, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        data: JSON.stringify(object),
-        dataType: "json"
-      })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      data: JSON.stringify(object),
+      dataType: "json"
+    })
       .done((data, statusText, res) => {
         console.log(res.status);
         switch (res.status) {
