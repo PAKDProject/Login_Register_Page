@@ -238,6 +238,9 @@ const loginFormSubmit = e => {
     .done((data, statusText, res) => {
       switch (res.status) {
         case 200:
+          let parsedData = JSON.parse(res.responseText)
+          localStorage.setItem('access_token', parsedData.tokens.access_token)
+          localStorage.setItem('id_token', parsedData.tokens.id_token)
           window.location.replace(`https://app.intellilance.com/callback/auth?access_token=${JSON.parse(res.responseText).tokens.access_token}&id_token=${JSON.parse(res.responseText).tokens.id_token}`); //TODO - Change url
           break;
       }
