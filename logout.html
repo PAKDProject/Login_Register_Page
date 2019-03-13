@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome to Intellilance - Freelancing made easy</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="./css/login.css" rel="stylesheet" type="text/css">
+    <link href="./css/logout.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400|Roboto" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background">
+        <div class="container">
+            <div class="row" id="top-row">
+                <!--SideBar Section-->
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-xs-12" id="form-area">
+                    <!--Logo Section-->
+                    <div class="row" id="logo">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <a href="index.html"><img src="./images/FullLogo.png" width="90%"></a>
+                        </div>
+                    </div>
+                    <!-- Login Form -->
+                    <div id="loginForm">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <h3 class="loggingOut">Logging Out</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script>
+        window.onload = () => {
+            localStorage.removeItem("access_token")
+            localStorage.removeItem("id_token")
+            window.location.href = "https://login.intellilance.com"
+        }
+    </script>
+</body>
+
+</html>

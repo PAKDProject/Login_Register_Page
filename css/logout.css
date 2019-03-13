@@ -1,0 +1,19 @@
+.loggingOut {
+    text-align: center;
+    color: white;
+}
+
+.loggingOut::after {
+    animation: dots 2s steps(3) infinite;
+    content: "...";
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
+  
+  @keyframes dots {
+    0% { width: 0; }
+    25% { width: 0.5ch;}
+    50% {width: 1ch}
+    75% {width: 1.5ch;}
+  }

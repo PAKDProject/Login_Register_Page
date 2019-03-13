@@ -1,8 +1,10 @@
 $(document).ready(() => {
   let globalEmail;
-  sendCookieResponse();
-
-
+  if (localStorage.getItem("access_token") && localStorage.getItem("id_token")) {
+    var access_token = localStorage.getItem("access_token")
+    var id_token = localStorage.getItem("id_token")
+    window.location.replace(`https://app.intellilance.com/callback/auth?access_token=${access_token}&id_token=${id_token}`); //TODO - Change url
+  }
   //Show or hide form based on selections on page
   $("#toggleRegisterPage").click(() => {
     $("#loginForm").toggleClass("hidden");
@@ -54,15 +56,15 @@ $(document).ready(() => {
 const sendCookieResponse = () => {
   const apiUrl = "https://api.intellilance.com/auth/login";
   $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      crossDomain: true,
-      xhrFields: {
-        withCredentials: true
-      },
-      type: "POST"
-    })
+    headers: {
+      "Content-Type": "application/json"
+    },
+    crossDomain: true,
+    xhrFields: {
+      withCredentials: true
+    },
+    type: "POST"
+  })
     .done((data, statusText, res) => {
       switch (res.status) {
         case 200:
@@ -87,15 +89,15 @@ const confirmPasswordChangeFormSubmit = e => {
     const apiUrl = "https://api.intellilance.com/auth/forgot/start"; //Enter endpoint
 
     $.post(apiUrl, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        data: JSON.stringify({
-          email: globalEmail
-        }),
-        dataType: "json"
-      })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      data: JSON.stringify({
+        email: globalEmail
+      }),
+      dataType: "json"
+    })
       .done((data, statusText, res) => {
         switch (res.status) {
           case 200:
@@ -145,13 +147,13 @@ const forgotPasswordFormSubmit = e => {
     const apiUrl = "https://api.intellilance.com/auth/forgot/verify"; //Enter endpoint
 
     $.post(apiUrl, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        data: JSON.stringify(resetPasswordObject),
-        dataType: "json"
-      })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      data: JSON.stringify(resetPasswordObject),
+      dataType: "json"
+    })
       .done((data, statusText, res) => {
         switch (res.status) {
           case 201:
@@ -177,15 +179,15 @@ const forgotPasswordFormSubmit = e => {
 const resendConfirmationCode = () => {
   const apiUrl = "https://api.intellilance.com/auth/revalidate"
   $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      data: JSON.stringify({
-        email: globalEmail
-      }),
-      dataType: "json"
-    })
+    headers: {
+      "Content-Type": "application/json"
+    },
+    type: "POST",
+    data: JSON.stringify({
+      email: globalEmail
+    }),
+    dataType: "json"
+  })
     .done((data, statusText, res) => {
       switch (res.status) {
         case 200:
@@ -222,17 +224,17 @@ const loginFormSubmit = e => {
   const apiUrl = "https://api.intellilance.com/auth/login";
 
   $.post(apiUrl, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      crossDomain: true,
-      xhrFields: {
-        withCredentials: true
-      },
-      data: JSON.stringify(loginObject),
-      dataType: "json"
-    })
+    headers: {
+      "Content-Type": "application/json"
+    },
+    type: "POST",
+    crossDomain: true,
+    xhrFields: {
+      withCredentials: true
+    },
+    data: JSON.stringify(loginObject),
+    dataType: "json"
+  })
     .done((data, statusText, res) => {
       switch (res.status) {
         case 200:
@@ -298,13 +300,13 @@ const registerFormSubmit = e => {
       const apiUrl = "https://api.intellilance.com/auth/register"; //Enter endpoint
 
       $.post(apiUrl, {
-          headers: {
-            "Content-Type": "application/json"
-          },
-          type: "POST",
-          data: JSON.stringify(registrationObject),
-          dataType: "json"
-        })
+        headers: {
+          "Content-Type": "application/json"
+        },
+        type: "POST",
+        data: JSON.stringify(registrationObject),
+        dataType: "json"
+      })
         .done((data, statusText, res) => {
           switch (res.status) {
             case 201:
@@ -348,13 +350,13 @@ const confirmationFormSubmit = e => {
     };
 
     $.post(apiUrl, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        data: JSON.stringify(object),
-        dataType: "json"
-      })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      data: JSON.stringify(object),
+      dataType: "json"
+    })
       .done((data, statusText, res) => {
         switch (res.status) {
           case 201:
